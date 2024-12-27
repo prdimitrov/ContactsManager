@@ -12,10 +12,11 @@ import com.example.contactsmanager.databinding.ContactListItemBinding;
 import com.example.contactsmanager.entity.Contact;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
 
-    private ArrayList<Contact> contacts;
+    private List<Contact> contacts;
 
     public ContactAdapter(ArrayList<Contact> contacts) {
         this.contacts = contacts;
@@ -55,12 +56,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         }
     }
 
-    public void setContacts(ArrayList<Contact> contacts) {
-        this.contacts = contacts;
-
+    public void updateContacts(List<Contact> newContacts) {
         //Inform the associated RecyclerView that the underlying
         //dataset has changed, and the RecyclerView should refresh
         //its views to reflect these changes.
+        this.contacts.clear();
+        this.contacts.addAll(newContacts);
         notifyDataSetChanged();
     }
 
