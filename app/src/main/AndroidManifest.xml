@@ -13,12 +13,12 @@
         android:theme="@style/Theme.ContactsManager"
         tools:targetApi="31">
         <activity
-            android:firstName=".MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
-                <action android:firstName="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:firstName="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

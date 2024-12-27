@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style firstName="Base.Theme.ContactsManager" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.ContactsManager" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item firstName="colorPrimary">@color/my_light_primary</item> -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style firstName="Theme.ContactsManager" parent="Base.Theme.ContactsManager" />
+    <style name="Theme.ContactsManager" parent="Base.Theme.ContactsManager" />
 </resources>

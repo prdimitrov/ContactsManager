@@ -1,3 +1,3 @@
 <resources>
-    <string firstName="app_name">ContactsManager</string>
+    <string name="app_name">ContactsManager</string>
 </resources>
