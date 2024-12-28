@@ -61,15 +61,12 @@ public class MainActivity extends AppCompatActivity {
             ContactViewModel viewModel = new ViewModelProvider(this)
                     .get(ContactViewModel.class);
 
-            // Inserting a new Contact (Just For Testing):
-            Contact c1 = new Contact("Edin", "Gospodin", "egn@abv.bg");
-            viewModel.addNewContact(c1);
-
             // Load the data from ROOM DB
             viewModel.getAllContacts().observe(this, new Observer<List<Contact>>() {
                 @Override
                 public void onChanged(List<Contact> newContacts) {
                     for (Contact c : newContacts) {
+                        contacts.clear();
                         Log.v("TAGY", "id: " + c.getId() + ", name: " + c.getFirstNameAndLastName());
                     }
                     myAdapter.updateContacts(newContacts);
