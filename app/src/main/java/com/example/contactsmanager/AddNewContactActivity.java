@@ -8,10 +8,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.contactsmanager.databinding.ActivityAddNewContactBinding;
 import com.example.contactsmanager.entity.Contact;
 import com.example.contactsmanager.handler.AddNewContactClickHandler;
+import com.example.contactsmanager.viewmodel.ContactViewModel;
 
 public class AddNewContactActivity extends AppCompatActivity {
 
@@ -32,7 +34,10 @@ public class AddNewContactActivity extends AppCompatActivity {
 
             binding = DataBindingUtil.setContentView(this, R.layout.activity_add_new_contact);
 
-            handler = new AddNewContactClickHandler(contact, this);
+            ContactViewModel viewModel = new ViewModelProvider(this)
+                    .get(ContactViewModel.class);
+
+            handler = new AddNewContactClickHandler(contact, this, viewModel);
 
             binding.setContact(contact);
 

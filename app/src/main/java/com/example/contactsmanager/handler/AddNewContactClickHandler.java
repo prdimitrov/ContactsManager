@@ -7,14 +7,17 @@ import android.widget.Toast;
 
 import com.example.contactsmanager.MainActivity;
 import com.example.contactsmanager.entity.Contact;
+import com.example.contactsmanager.viewmodel.ContactViewModel;
 
 public class AddNewContactClickHandler {
     private Contact contact;
     private Context context;
+    private ContactViewModel viewModel;
 
-    public AddNewContactClickHandler(Contact contact, Context context) {
+    public AddNewContactClickHandler(Contact contact, Context context, ContactViewModel viewModel) {
         this.contact = contact;
         this.context = context;
+        this.viewModel = viewModel;
     }
 
     public void onSubmitButtonClicked(View view) {
@@ -22,9 +25,11 @@ public class AddNewContactClickHandler {
             Toast.makeText(context, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
         } else {
             Intent i = new Intent(context, MainActivity.class);
-            i.putExtra("FirstName", contact.getFirstName());
-            i.putExtra("lastName", contact.getLastName());
-            i.putExtra("Email", contact.getEmail());
+//            i.putExtra("FirstName", contact.getFirstName());
+//            i.putExtra("lastName", contact.getLastName());
+//            i.putExtra("Email", contact.getEmail());
+            Contact c = new Contact(contact.getFirstName(), contact.getLastName(), contact.getEmail());
+            viewModel.addNewContact(c);
             context.startActivity(i);
         }
     }
