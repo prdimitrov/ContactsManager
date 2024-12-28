@@ -30,6 +30,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
 
             android:onClick="@{clickHandler::onFABClicked}"
+            android:src="@drawable/baseline_add_24"
             android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

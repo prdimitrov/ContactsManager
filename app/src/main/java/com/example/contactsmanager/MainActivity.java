@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -11,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,11 +67,15 @@ public class MainActivity extends AppCompatActivity {
             viewModel.getAllContacts().observe(this, new Observer<List<Contact>>() {
                 @Override
                 public void onChanged(List<Contact> newContacts) {
+                    contacts.clear(); // Clear the old data
+                    contacts.addAll(newContacts); // Add the new data to the list
+
+                    // Log the contacts for debugging
                     for (Contact c : newContacts) {
-                        contacts.clear();
                         Log.v("TAGY", "id: " + c.getId() + ", name: " + c.getFirstNameAndLastName());
                     }
-                    myAdapter.updateContacts(newContacts);
+
+                    myAdapter.updateContacts(newContacts); // Update the adapter with new data
                 }
             });
 
@@ -78,6 +84,24 @@ public class MainActivity extends AppCompatActivity {
 
             // Linking the RecyclerView with the Adapter
             recyclerView.setAdapter(myAdapter);
+
+            // Swipe to delete contact
+            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+                @Override
+                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    // Swipe item to the left
+                    Contact c = contacts.get(viewHolder.getAdapterPosition());
+
+                    viewModel.deleteContact(c);
+
+
+                }
+            }).attachToRecyclerView(recyclerView);
 
             return insets;
         });
